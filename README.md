@@ -30,6 +30,7 @@ This project analyzes data provided by [Figure Eight](https://appen.com/datasets
 
 # Build Instructions
 
+- This project must be run using Python3 since the nltk library is only available for Python3.
 - To run the ETL pipeline creating the sqlite database of the cleaned data:
 ```
 python data/etl_pipeline.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
