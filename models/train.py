@@ -1,5 +1,12 @@
 from sqlalchemy import create_engine
 import pandas as pd
+import ssl
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 import nltk
 nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 from nltk.tokenize import word_tokenize
@@ -12,6 +19,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
+import pickle
+import sys
+from os import path
+
 
 def load_data(database):
     """
@@ -54,7 +65,7 @@ def tokenize(text):
     return clean_tokens
 
 
-def build_model(use_cv=True):
+def build_model(use_cv=False):
     """
     Build the ML pipeline consisting of the following:
     - CountVectorizer which tokenizes each message
@@ -62,7 +73,7 @@ def build_model(use_cv=True):
     - MultiOutputClassifier with RandomForestClassifier
 
     Input:
-    - use_cv = set to True (default) to perform grid search
+    - use_cv = set to True to perform grid search
 
     Output:
     - model = ML pipeline
@@ -134,8 +145,8 @@ if __name__=="__main__":
     database = sys.argv[1]
     if not path.exists(database):
         sys.exit('Database is missing')
-    model = sys.argv[2]
-    if path.exists(model):
+    model_location = sys.argv[2]
+    if path.exists(model_location):
         sys.exit('Model already exists')
 
     # Load data from database into feature matrix and response vector
@@ -155,3 +166,6 @@ if __name__=="__main__":
 
     # Display the results
     display_results(y_test, y_pred)
+
+    # Export the model
+    pickle.dump(model, open(model_location, 'wb'))
