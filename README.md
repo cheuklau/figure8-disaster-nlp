@@ -31,6 +31,10 @@ This project analyzes data provided by [Figure Eight](https://appen.com/datasets
 # Build Instructions
 
 - This project must be run using Python3 since the nltk library is only available for Python3.
+- Install Python dependencies:
+```
+pip install -r requirements.txt
+```
 - To run the ETL pipeline creating the sqlite database of the cleaned data:
 ```
 python data/etl_pipeline.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
@@ -41,5 +45,5 @@ python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 ```
 - To start the web app which will visualize the data and run the model to classify new messages:
 ```
-to-do
+python app/run.py
 ```
