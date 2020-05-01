@@ -10,40 +10,43 @@ This project analyzes data provided by [Figure Eight](https://appen.com/datasets
 
 ```
 - app
-  | - template
-  | - master.html
-  | - go.html
-  | - run.py
+  | - templates = contains html templates for the web app
+  | | - master.html
+  | | - go.html
+  | - run.py = main flask file
 - data
-  | - disaster_categories.csv = raw data from Figure 8
-  | - disaster_messages.csv = raw data from Figure 8
-  | - etl_pipeline.py = ETL script to generate DisasterResponse.db from raw data
-  | - DisasterResponse.db = output database from etl_pipeline.py
+  | - categories.csv = raw categories data from Figure 8
+  | - messages.csv = raw messages data from Figure 8
+  | - etl_pipeline.py = python script to generate database from raw data
+  | - DisasterResponse.db = output database from etl_pipeline.py (not stored)
 - models
-  | - train.py = ML script to create classifier.pkl from DisasterResponse.db data
-  | - classifier.pkl = output ML model from train.py
+  | - train_classifier.py = script to create ML model
+  | - classifier.pkl = output ML model from train_classifier.py (not stored)
 - jupyter
-  | - etl-preparation.ipynb = jupyter notebook explaining etl_pipeline.py
-  | - ml-pipeline.ipynb = jupyteer notebook explaining train.py
+  | - etl-preparation.ipynb = jupyter notebook for etl_pipeline.py
+  | - ml-pipeline.ipynb = jupyteer notebook for train_classifier.py
+- requirements.txt = python dependencies for project
 - README.md
+- LICENSE
 ```
 
 # Build Instructions
 
-- This project must be run using Python3 since the nltk library is only available for Python3.
-- Install Python dependencies:
+This project must be run using Python3. Perform the following steps to deploy the web app:
+1. Install all of the Python dependencies:
 ```
 pip install -r requirements.txt
 ```
-- To run the ETL pipeline creating the sqlite database of the cleaned data:
+2. Run the ETL pipeline to create an sqlite database of the cleaned data:
 ```
 python data/etl_pipeline.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
 ```
-- To build the ML pipeline creatimg a multi-output supervised learning model:
+3. Run the ML pipeline to build a multi-output supervised ML model:
 ```
 python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 ```
-- To start the web app which will visualize the data and run the model to classify new messages:
+4. Start the web app which will visualize the data and run the ML model to classify new messages:
 ```
 python app/run.py
 ```
+5. Navigate to the web app in your browser at `http://0.0.0.0:3001/`
