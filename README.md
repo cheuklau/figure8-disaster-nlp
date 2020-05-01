@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ```
 2. Run the ETL pipeline to create an sqlite database of the cleaned data:
 ```
-python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+python data/process_data.py data/messages.csv data/categories.csv data/DisasterResponse.db
 ```
 3. Run the ML pipeline to build a multi-output supervised ML model:
 ```
