@@ -47,7 +47,6 @@ python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 ```
 4. Start the web app which will visualize the data and run the ML model to classify new messages:
 ```
-cd app
-python run.py
+cd app && python run.py
 ```
 5. Navigate to the web app in your browser at `http://0.0.0.0:3001/`
