@@ -17,7 +17,7 @@ This project analyzes data provided by [Figure Eight](https://appen.com/datasets
 - data
   | - categories.csv = raw categories data from Figure 8
   | - messages.csv = raw messages data from Figure 8
-  | - etl_pipeline.py = python script to generate database from raw data
+  | - process_data.py = python script to generate database from raw data
   | - DisasterResponse.db = output database from etl_pipeline.py (not stored)
 - models
   | - train_classifier.py = script to create ML model
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ```
 2. Run the ETL pipeline to create an sqlite database of the cleaned data:
 ```
-python data/etl_pipeline.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
 ```
 3. Run the ML pipeline to build a multi-output supervised ML model:
 ```
